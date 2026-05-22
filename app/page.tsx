@@ -12,28 +12,29 @@ import {
   Heart,
   Sparkles,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ExternalLink
 } from 'lucide-react';
 
 const DRIVE_FOLDER_LINK = "https://drive.google.com/drive/folders/1IaTWw8HEmTo7IbyxudN65yu9zNkUgdbD?usp=drive_link";
 
 const INITIAL_MEMBERS = [
-  { id: "1", name: "Abegael A Jardinero", bio: "Group creator ✨", driveLink: "" },
-  { id: "2", name: "Andro Oberos Aynera", bio: "PHYSCI2018 Pioneer 🔬", driveLink: "" },
-  { id: "3", name: "Arra Mae De Loyola", bio: "Always active! ⚡", driveLink: "" },
-  { id: "4", name: "Christine Joy Jarapa - Largado", bio: "Keeping the group together ❤️", driveLink: "" },
-  { id: "5", name: "Ian Reyes Soriano", bio: "The legendary theorist 🌌", driveLink: "" },
-  { id: "6", name: "Jamil Ramos Alejandria", bio: "PHYSCI2018 energy provider 🔋", driveLink: "" },
-  { id: "7", name: "Jefferson Abasola", bio: "On top of every milestone 📈", driveLink: "" },
-  { id: "8", name: "John Ryan M. Marasigan", bio: "Making memories every day 📸", driveLink: "" },
-  { id: "9", name: "Luisa Salamia", bio: "PHYSCI2018 anchor ⚓", driveLink: "" },
-  { id: "10", name: "Lyka Bernadette Versoza", bio: "Stellar performer ⭐", driveLink: "" },
-  { id: "11", name: "Maria Anthonette Bea Abasola", bio: "Memory documenter 📝", driveLink: "" },
-  { id: "12", name: "Mark Peñas Arce", bio: "Chasing milestones 🚀", driveLink: "" },
-  { id: "13", name: "Mjg Barrosa", bio: "PHYSCI2018 life of the party 🎉", driveLink: "" },
-  { id: "14", name: "Oxy Paredes Fordan", bio: "Vibe coding master 💻", driveLink: "" },
-  { id: "15", name: "Resha Pangindian Mendoza", bio: "Always bringing the good news 🌟", driveLink: "" },
-  { id: "16", name: "Thea Baluyo", bio: "Spreading positive vibes ✨", driveLink: "" }
+  { id: "1", name: "Abegael A Jardinero", bio: "Group creator ✨", driveLink: "https://drive.google.com", photoUrl: "" },
+  { id: "2", name: "Andro Oberos Aynera", bio: "PHYSCI2018 Pioneer 🔬", driveLink: "", photoUrl: "" },
+  { id: "3", name: "Arra Mae De Loyola", bio: "Always active! ⚡", driveLink: "", photoUrl: "" },
+  { id: "4", name: "Christine Joy Jarapa - Largado", bio: "Keeping the group together ❤️", driveLink: "", photoUrl: "" },
+  { id: "5", name: "Ian Reyes Soriano", bio: "The legendary theorist 🌌", driveLink: "", photoUrl: "" },
+  { id: "6", name: "Jamil Ramos Alejandria", bio: "PHYSCI2018 energy provider 🔋", driveLink: "", photoUrl: "" },
+  { id: "7", name: "Jefferson Abasola", bio: "On top of every milestone 📈", driveLink: "", photoUrl: "" },
+  { id: "8", name: "John Ryan M. Marasigan", bio: "Making memories every day 📸", driveLink: "", photoUrl: "" },
+  { id: "9", name: "Luisa Salamia", bio: "PHYSCI2018 anchor ⚓", driveLink: "", photoUrl: "" },
+  { id: "10", name: "Lyka Bernadette Versoza", bio: "Stellar performer ⭐", driveLink: "", photoUrl: "" },
+  { id: "11", name: "Maria Anthonette Bea Abasola", bio: "Memory documenter 📝", driveLink: "", photoUrl: "" },
+  { id: "12", name: "Mark Peñas Arce", bio: "Chasing milestones 🚀", driveLink: "", photoUrl: "" },
+  { id: "13", name: "Mjg Barrosa", bio: "PHYSCI2018 life of the party 🎉", driveLink: "", photoUrl: "" },
+  { id: "14", name: "Oxy Paredes Fordan", bio: "Vibe coding master 💻", driveLink: "", photoUrl: "" },
+  { id: "15", name: "Resha Pangindian Mendoza", bio: "Always bringing the good news 🌟", driveLink: "", photoUrl: "" },
+  { id: "16", name: "Thea Baluyo", bio: "Spreading positive vibes ✨", driveLink: "", photoUrl: "" }
 ];
 
 const INITIAL_MILESTONES = [
@@ -79,8 +80,10 @@ export default function PhysciHub() {
     localStorage.setItem('physci_milestones', JSON.stringify(updatedMilestones));
   };
 
-  const handleUpdateBio = (id: string, newBio: string, newLink: string) => {
-    const updated = members.map(m => m.id === id ? { ...m, bio: newBio, driveLink: newLink } : m);
+  const handleUpdateBio = (id: string, newBio: string, newLink: string, newPhotoUrl?: string) => {
+    const updated = members.map(m =>
+      m.id === id ? { ...m, bio: newBio, driveLink: newLink, photoUrl: newPhotoUrl ?? m.photoUrl } : m
+    );
     setMembers(updated);
     saveToLocal(updated, milestones);
   };
@@ -257,10 +260,11 @@ export default function PhysciHub() {
                         href={item.driveLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center space-x-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-xs px-3 py-1.5 rounded-xl border border-blue-500/20 font-bold tracking-wide transition-all"
+                        className="inline-flex items-center space-x-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-xs px-3 py-1.5 rounded-xl border border-blue-500/20 font-bold tracking-wide transition-all"
                       >
                         <Folder className="h-3.5 w-3.5" />
                         <span>Open Drive Gallery</span>
+                        <ExternalLink className="h-3 w-3 opacity-60" />
                       </a>
                     )}
                   </div>
@@ -291,8 +295,18 @@ export default function PhysciHub() {
                       className="p-4 flex items-center justify-between cursor-pointer select-none"
                     >
                       <div className="flex items-center space-x-3">
-                        <div className="h-10 w-10 bg-gradient-to-br from-blue-500 to-emerald-400 rounded-xl flex items-center justify-center text-white font-black text-sm tracking-wide shadow-inner">
-                          {member.name.split(' ').map(n => n[0]).join('').substring(0,2)}
+                        <div className="relative h-10 w-10 rounded-xl overflow-hidden shadow-inner">
+                          {member.photoUrl ? (
+                            <img
+                              src={member.photoUrl}
+                              alt={`${member.name} profile`}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="h-full w-full bg-gradient-to-br from-blue-500 to-emerald-400 flex items-center justify-center text-white font-black text-sm tracking-wide">
+                              {member.name.split(' ').map(n => n[0]).join('').substring(0,2)}
+                            </div>
+                          )}
                         </div>
                         <div>
                           <h3 className="font-bold text-slate-200 text-sm tracking-wide">{member.name}</h3>
@@ -316,13 +330,24 @@ export default function PhysciHub() {
                           />
                         </div>
                         <div>
+                          <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Profile Photo URL</label>
+                          <input
+                            type="url"
+                            defaultValue={member.photoUrl}
+                            placeholder="https://example.com/photo.jpg"
+                            onBlur={(e) => handleUpdateBio(member.id, member.bio, member.driveLink, e.target.value)}
+                            className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500 transition-all"
+                          />
+                          <p className="text-[10px] text-slate-500 mt-1">Add a hosted image URL to show your profile picture.</p>
+                        </div>
+                        <div>
                           <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Dedicated Personal Drive Folder Link</label>
                           <div className="flex items-center space-x-2">
                             <input
                               type="url"
                               defaultValue={member.driveLink}
                               placeholder="https://drive.google.com/drive/..."
-                              onBlur={(e) => handleUpdateBio(member.id, member.bio, e.target.value)}
+                              onBlur={(e) => handleUpdateBio(member.id, member.bio, e.target.value, member.photoUrl)}
                               className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 transition-all"
                             />
                             {member.driveLink && (
