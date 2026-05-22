@@ -41,17 +41,17 @@ const INITIAL_MILESTONES = [
   {
     id: "m1",
     memberName: "Abegael A Jardinero",
-    title: "Created the PHYSCI2018 Hub",
+    title: "Built the PHYSCI2018 web hub",
     date: "2026-05-22",
-    description: "Launched our beautiful pink, blue, and green digital space to keep all our memories alive!",
+    description: "Laid down the first version of the group homepage as a clean, fast browser-based memory board.",
     driveLink: DRIVE_FOLDER_LINK
   },
   {
     id: "m2",
     memberName: "Oxy Paredes Fordan",
-    title: "Vibe Coded the Hub Interface",
+    title: "Styled the team interface",
     date: "2026-05-22",
-    description: "Successfully ditched expensive API backends and deployed a pure, beautiful interactive frontend client.",
+    description: "Polished the layout with stronger color accents, simpler navigation, and more readable member cards.",
     driveLink: DRIVE_FOLDER_LINK
   }
 ];
