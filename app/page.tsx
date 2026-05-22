@@ -73,6 +73,12 @@ export default function PhysciHub() {
     const savedMilestones = localStorage.getItem('physci_milestones');
     if (savedMembers) setMembers(JSON.parse(savedMembers));
     if (savedMilestones) setMilestones(JSON.parse(savedMilestones));
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch((error) => {
+        console.error('Service worker registration failed:', error);
+      });
+    }
   }, []);
 
   const saveToLocal = (updatedMembers: typeof members, updatedMilestones: typeof milestones) => {
